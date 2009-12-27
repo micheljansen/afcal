@@ -103,7 +103,7 @@
         var time = null;
         if($("#specific_time").attr("checked")) {
           time = $("#time").val();
-          if(time != "") {
+          if(time != "" && time != "HH:MM") {
             url += "?time="+time;
           }
           else {
