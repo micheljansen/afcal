@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl">
+  <head>
+    <title>Twente Milieu Afval-iCalendar</title>
+    <style type="text/css">
+      body {
+        font-family: Lucida, Lucida, serif;
+      }
+      
+      th {
+        text-align: right;
+      }
+      
+      #target_url {
+        text-align: center;
+        margin-top: 100px;
+        display: block;
+/*        display: none;*/
+      }
+      
+      #target_url a {
+        display: inline;
+        background: #ffffee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 2em;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    
+    <script type="text/javascript" src="script/jquery.js"></script>
+    
+    <script type="text/javascript">
+      $(document).ready(function(){
+        update_url();
+        
+        // set default states
+        if(!$("#specific_time").attr("checked")) {
+          $("#time").fadeTo(0, 0.25);
+        }
+
+        // add event handlers
+        $("select,input").change(update_url);
+        $("input").keyup(update_url);
+        
+        // event handler automatically selecting the proper bullet
+        // when someone selects the time input field
+        $("#time").focus(function () {
+          $("#time").fadeTo(500, 1);
+          $("#specific_time").attr("checked", "checked");
+        });
+        
+        
+        // fade the time input box in and out to indicate its relevance
+        $("#allday").change(function () {
+          $("#time").fadeTo(1000, 0.25);
+        });
+        
+        $("#specific_time").change(function () {
+          $("#time").fadeTo(500, 1);
+        });
+        
+        // $("#target_url").hide();
+      });
+      
+      function update_url() {
+        var url = generate_url();
+        $("#target_url a").attr("href", url).text(url);
+      }
+      
+      function generate_url() {
+        var postalcode = $("#postalcode").val()
+        if(postalcode == "") {
+          postalcode = "postcode"
+        }
+        
+        var homenumber = $("#homenumber").val()
+        if(homenumber == "") {
+          homenumber = "huisnummer"
+        }
+        
+        var url = "<%=h BASE_URL%>/"+postalcode+"/"+homenumber;
+        
+        // time and alarm are optional
+        var time = null;
+        if($("#specific_time").attr("checked")) {
+          time = $("#time").val();
+          if(time != "") {
+            url += "?time="+time;
+          }
+          else {
+            time = null;
+          }
+        }
+        
+        var alarm = null;
+        if($("#alarm option:selected").val() != "disabled") {
+          alarm = $("#alarm").val();
+          url += (time == null ? "?" : "&");
+          url += "alarm="+alarm
+        }
+        
+        return url;
+      }
+    </script>
+
+  </head>
+  <body>
+    <h1>Twente Milieu Afval-iCalendar</h1>
+    
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+    <form id="settings" action="#" method="get">
+      <fieldset>
+        <legend>Gegevens</legend>
+        <table>
+          <tr>
+            <th><label for="postalcode">Postcode</label></th>
+            <td><input id="postalcode" name="postalcode" type="text"/></td>
+          </tr>
+          <tr>
+            <th><label for="homenumber">Huisnummer</label></th>
+            <td><input id="homenumber" name="homenumber" type="text"/></td>
+          </tr>
+          <tr>
+            <th><label for="time">Tijd</label></th>
+            <td>
+              <ul>
+                <li>
+                  <input id="allday" name="allday" value="1" type="radio" checked="checked"/>
+                  <label for="allday">Hele dag</label>
+                </li>
+                <li>
+                  <input id="specific_time" name="allday" value="0" type="radio"/>
+                  <label for="specific_time">Op tijd</label>
+                  <input id="time" name="time" type="text"/>
+                </li>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="alarm">Alarm</label></th>
+            <td>
+              <select id="alarm" name="alarm">
+                <option value="disabled">Geen alarm</option>
+                <% [0,15,30,60,90,120].each do |m| %>
+                  <option value="<%=h m %>"><%=h m %> minuten van tevoren</option>
+                <% end %>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </form>
+    
+    <span id="target_url">
+      <a href="<%=h BASE_URL %>"><%=h BASE_URL %></a>
+    </span>

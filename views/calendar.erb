@@ -1,0 +1,7 @@
+<%=
+"  postcode: #{@postalcode}<br/>
+  huisnummer: #{@housenumber}<br />
+  <ul>
+    #{@all_events.map{|e| "<li>#{e.to_s}</li>"}.join("\n")}
+  </ul>"
+  %>
