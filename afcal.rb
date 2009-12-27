@@ -11,13 +11,15 @@ get '/' do
 end
 
 get '/:postalcode/:housenumber/all.:format' do
+
   #sanitize parameters
-  time = nil
+  raise "no postal code provided" if params[:postalcode].nil? 
+  postalcode = params[:postalcode].gsub(/[^a-z|^0-9]/i, "")[0..5]
   
-  if params[:time] && params[:time] != ""
-    time = Time.parse(params[:time])
-    # DateTime.new(date.year, date.month, date.day, 18, 00)
-  end
+  raise "no house number provided" if params[:housenumber].nil?
+  housenumber = params[:housenumber].to_i
+  
+  time = Time.parse(params[:time]) if params[:time] && params[:time] != ""
   
   #fetch events
   all_events = TwenteMilieuData.new(params[:postalcode], params[:housenumber], time).all_events
@@ -27,7 +29,10 @@ get '/:postalcode/:housenumber/all.:format' do
     content_type 'text/calendar'
     all_events.to_icalendar.to_ical
   else
-    "<ul>
+    "
+    postcode: #{postalcode}<br/>
+    huisnummer: #{housenumber}<br />
+    <ul>
       #{all_events.map{|e| "<li>#{e.to_s}</li>"}.join("\n")}
     </ul>"
   end
