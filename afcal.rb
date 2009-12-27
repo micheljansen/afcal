@@ -20,6 +20,7 @@ get '/:postalcode/:housenumber/all.:format' do
   housenumber = params[:housenumber].to_i
   
   time = Time.parse(params[:time]) if params[:time] && params[:time] != ""
+  alarm = params[:alarm].to_i if params[:alarm]
   
   #fetch events
   all_events = TwenteMilieuData.new(params[:postalcode], params[:housenumber], time).all_events
@@ -27,7 +28,19 @@ get '/:postalcode/:housenumber/all.:format' do
   case params[:format]
   when "ics"
     content_type 'text/calendar'
-    all_events.to_icalendar.to_ical
+    icalendar = all_events.to_icalendar
+    
+    if alarm
+      icalendar.events.each do |event|
+        event.alarm do 
+          action        "DISPLAY" # This line isn't necessary, it's the default
+          summary       "Alarm"
+          trigger       "-PT#{alarm}M" #
+        end
+      end
+    end
+    
+    icalendar.to_ical
   else
     "
     postcode: #{postalcode}<br/>
