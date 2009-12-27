@@ -12,6 +12,7 @@
       
       th {
         text-align: right;
+        vertical-align: top;
       }
       
       #target_url {
@@ -25,7 +26,7 @@
         display: inline;
         background: #ffffee;
         font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 2em;
+        font-size: 1.5em;
       }
       
       ul {
@@ -35,11 +36,21 @@
       }
     </style>
     
-    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript" src="/script/jquery.js"></script>
     
     <script type="text/javascript">
       $(document).ready(function(){
         update_url();
+        
+        // set hint in time input box if it's empty
+        if($("#time").val() == "") {
+          $("#time").val("HH:MM");
+        }
+        
+        // clear the hint on first selection
+        $("#time").one("focus", function () {
+          $("#time").val("");
+        });
         
         // set default states
         if(!$("#specific_time").attr("checked")) {
@@ -86,7 +97,7 @@
           homenumber = "huisnummer"
         }
         
-        var url = "<%=h BASE_URL%>/"+postalcode+"/"+homenumber;
+        var url = "<%=h BASE_URL%>/"+postalcode+"/"+homenumber+"/all.ics";
         
         // time and alarm are optional
         var time = null;
