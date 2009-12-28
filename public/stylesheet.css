@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: Lucida Sans, sans-serif;
+  font-family: Tahoma, Geneva, sans-serif;
 	font-size: 20px;
   background: black;
   color: white;
@@ -66,6 +66,7 @@ th {
 
 .multirow {
 	vertical-align: top;
+	padding-top: 4px;
 }
 
 
@@ -81,7 +82,7 @@ label {
 }
 
 input {
-	font-family: Lucida Sans, sans-serif;
+	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 20px;
 	color: black;
 	background-color: rgba(255,255,255,0.25);
@@ -92,16 +93,28 @@ input[type="text"], select {
 	width: 200px;
 }
 
-#target_url {
-  text-align: center;
-  margin-top: 50px;
+#url_wrapper {
   display: block;
+	text-align: center;
+  margin-top: 50px;
+}
+
+#target_url {
+  display: inline;
 	padding: 20px;
-/*        display: none;*/
   background-color: #ffffee;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.5em;
 }
+
+#target_url a {
+	color: black;
+}
+
+#target_url a:hover {
+	color: #333;
+}
+
 
 #timechoices {
 	display: block;
