@@ -14,6 +14,10 @@ a, a:visited, a:active {
 	color: white;
 }
 
+p {
+	margin-top: 0.5em;
+}
+
 #wrapper {
   background: url('/images/trash.jpg') left top no-repeat;
   margin-top: 0;
@@ -136,12 +140,18 @@ input[type="text"], select {
 	width: 100px;
 }
 
-ul {
+#settings ul {
   list-style: none;
 }
 
-li {
+#settings li {
 	padding: 4px;
+}
+
+#step_2_additional_explanation li {
+	list-style: circle inside;
+	margin-left: 20px;
+	margin-top: 4px;
 }
 
 .stepbox {
@@ -179,14 +189,25 @@ li {
 	font-size: 0.75em;
 }
 
+#step_1_additional_explanation {
+	margin-bottom: 12px;
+}
+
+#step_2_additional_explanation {
+	margin-top: 12px;
+}
+
 .more_link, .more_link a, .more_link a:visited {
 	text-decoration: none;
 	display: none;
-	margin-left: 300px;
+	margin: 0;
+/*	margin-left: 300px;*/
+	padding: 0;
 	color: #ddd;
 	text-shadow: 1px 1px 0px #eee;
 	text-align: center;
 }
+
 #step_1_explanation {
 	background: url("/images/1.png") left top no-repeat;
 }
