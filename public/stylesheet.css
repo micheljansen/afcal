@@ -94,13 +94,18 @@ input[type="text"], select {
 
 #target_url {
   display: block;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.25em;
+/*  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;*/
+	font-family: Lucida Console, Monaco, monospace;
+  font-size: 0.75em;
 	text-align: center;
 }
 
 #target_url a {
 	color: black;
+	text-decoration: none;
+	white-space: normal;
+	display: inline;
+	word-wrap: break-word;
 }
 
 #target_url a:hover {
