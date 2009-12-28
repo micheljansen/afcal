@@ -10,6 +10,10 @@ body {
   color: white;
 }
 
+a, a:visited, a:active {
+	color: white;
+}
+
 #wrapper {
   background: url('/images/trash.jpg') left top no-repeat;
   margin-top: 0;
@@ -30,8 +34,18 @@ body {
   font-size: 0.5em;
 }
 
-#footer a, #footer a:visited {
-	color: white;
+#introduction {
+	width: 600px;
+	padding: 0px 0px 20px 20px;
+	margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+	text-shadow: 1px 1px 2px #000;
+}
+
+#introduction a, #introduction a:visited, #introduction a:active {
+	text-decoration: none;
+	color: #ddf;
 }
 
 h1 {
@@ -39,7 +53,7 @@ h1 {
 	text-shadow: 2px 2px 5px #000;
 	font-size: 2em;
 	font-weight: normal;
-	margin-bottom: 20px;
+	margin-bottom: 4px;
 }
 
 fieldset {
