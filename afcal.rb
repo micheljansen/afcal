@@ -5,7 +5,7 @@ require 'time'
 require 'lib/twente_milieu_data'
 
 # the full url where this app will be installed.
-BASE_URL = "http://localhost:9393"
+BASE_URL = "http://afcal.micheljansen.org"
 
 helpers do
   include Rack::Utils
