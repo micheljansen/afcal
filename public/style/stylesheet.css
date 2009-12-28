@@ -11,7 +11,7 @@ body {
 }
 
 #wrapper {
-  background: url('trash.jpg') left top no-repeat;
+  background: url('/images/trash.jpg') left top no-repeat;
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
@@ -157,9 +157,9 @@ li {
 }
 
 #step_1_explanation {
-	background: url("1.png") left top no-repeat;
+	background: url("/images/1.png") left top no-repeat;
 }
 
 #step_2_explanation {
-	background: url("2.png") left top no-repeat;
+	background: url("/images/2.png") left top no-repeat;
 }
