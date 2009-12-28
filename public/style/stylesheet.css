@@ -67,7 +67,7 @@ fieldset legend {
 
 th {
   text-align: right;
-  vertical-align: center;
+  vertical-align: middle;
   text-decoration: none;
 	font-weight: normal;
 	padding-right: 1em;
@@ -87,7 +87,7 @@ td {
 
 label {
 	text-transform: lowercase;
-	vertical-align: center;
+	vertical-align: middle;
 }
 
 input {
@@ -154,6 +154,10 @@ li {
 	color: black;
 }
 
+.stepbox a, .stepbox a:visited, .stepbox a:active {
+	color: black;
+}
+
 .step_header {
 	width: 0;
 	padding: 0 0 0 64px;
@@ -166,10 +170,23 @@ li {
 	height: 64px;
 	padding: 4px;
 	padding-left: 72px;
-	vertical-align: center;
+	vertical-align: middle;
 	overflow: visible;
 }
 
+.additional_explanation {
+	padding: 4px;
+	font-size: 0.75em;
+}
+
+.more_link, .more_link a, .more_link a:visited {
+	text-decoration: none;
+	display: none;
+	margin-left: 300px;
+	color: #ddd;
+	text-shadow: 1px 1px 0px #eee;
+	text-align: center;
+}
 #step_1_explanation {
 	background: url("/images/1.png") left top no-repeat;
 }

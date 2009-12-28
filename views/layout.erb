@@ -13,6 +13,11 @@
       $(document).ready(function(){
         update_url();
         
+        // show and hide some things
+        $("#step_1_more_link").show();
+        $("#step_1_additional_explanation").hide();
+        
+        
         // set hint in time input box if it's empty
         if($("#time").val() == "") {
           $("#time").val("HH:MM");
@@ -51,6 +56,21 @@
         });
         
         // $("#target_url").hide();
+        
+        $("#step_1_more_link").click(function(event) {
+          event.preventDefault();
+          $("#step_1_additional_explanation").slideDown(500);
+          $("#step_1_more_link").hide();
+          $("#step_1_less_link").show();
+        });
+
+        $("#step_1_less_link").click(function(event) {
+          event.preventDefault();
+          $("#step_1_additional_explanation").slideUp(500);
+          $("#step_1_less_link").hide();
+          $("#step_1_more_link").show();
+        });
+
       });
       
       function update_url() {
