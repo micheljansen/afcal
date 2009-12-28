@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: Tahoma, Geneva, sans-serif;
+  font-family: Geneva, Tahoma, sans-serif;
 	font-size: 20px;
   background: black;
   color: white;
@@ -15,7 +15,7 @@ body {
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
-  width: 1024px;
+  width: 100%;
   height: 680px;
 }
 
@@ -27,7 +27,7 @@ body {
   position: relative;
   top: 100px;
   text-align: center;
-  font-size: 0.75em;
+  font-size: 0.5em;
 }
 
 #footer a, #footer a:visited {
@@ -44,12 +44,7 @@ h1 {
 
 fieldset {
 	color: black;
-	background-color: rgba(255,255,255,0.75);
-	border: 1px solid white;
-	padding: 20px;
-	width: 600px;
-	margin-left: auto;
-  margin-right: auto;
+	border: 0;
 }
 
 fieldset legend {
@@ -82,7 +77,7 @@ label {
 }
 
 input {
-	font-family: Tahoma, Geneva, sans-serif;
+	font-family: Geneva, Tahoma, sans-serif;
 	font-size: 20px;
 	color: black;
 	background-color: rgba(255,255,255,0.25);
@@ -93,18 +88,15 @@ input[type="text"], select {
 	width: 200px;
 }
 
-#url_wrapper {
-  display: block;
-	text-align: center;
+#step_2 {
   margin-top: 50px;
 }
 
 #target_url {
-  display: inline;
-	padding: 20px;
-  background-color: #ffffee;
+  display: block;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 1.5em;
+  font-size: 1.25em;
+	text-align: center;
 }
 
 #target_url a {
@@ -131,4 +123,38 @@ ul {
 
 li {
 	padding: 4px;
+}
+
+.stepbox {
+	width: 600px;
+	padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+	background-color: rgba(255,255,255,0.75);
+	border: 1px solid white;
+	color: black;
+}
+
+.step_header {
+	width: 0;
+	padding: 0 0 0 64px;
+	height: 64px;
+	overflow: hidden;
+	display: none;
+}
+
+.step_explanation {
+	height: 64px;
+	padding: 4px;
+	padding-left: 72px;
+	vertical-align: center;
+	overflow: visible;
+}
+
+#step_1_explanation {
+	background: url("1.png") left top no-repeat;
+}
+
+#step_2_explanation {
+	background: url("2.png") left top no-repeat;
 }
