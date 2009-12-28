@@ -87,7 +87,7 @@ function generate_url() {
     homenumber = "huisnummer"
   }
   
-  var url = "<%=h BASE_URL%>/"+postalcode+"/"+homenumber+"/all.ics";
+  var url = base_url()+"/"+postalcode+"/"+homenumber+"/all.ics";
   
   // time and alarm are optional
   var time = null;
