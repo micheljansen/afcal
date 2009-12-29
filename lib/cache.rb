@@ -1,20 +1,21 @@
-# source: http://railsillustrated.com/blazing-fast-sinatra-with-memcached.html
+# based on: http://railsillustrated.com/blazing-fast-sinatra-with-memcached.html
 require 'memcache'
 require 'digest/md5'
 
 module Sinatra
   class Cache
-    def self.cache(key, &block)
+    def self.cache(key, options={}, &block)
       unless CONFIG['memcached']
         raise "Configure CONFIG['memcached'] to be a string like 'localhost:11211' "
       end
       begin
+        options[:expire] ||= 0
         key = Digest::MD5.hexdigest(key)
         @@connection ||= MemCache.new(CONFIG['memcached'], :namespace => 'Sinatra/')
         result = @@connection.get(key)
         return result if result
         result = yield
-        @@connection.set(key, result)
+        @@connection.set(key, result, options[:expire])
         result
       rescue
         yield
