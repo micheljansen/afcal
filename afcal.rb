@@ -2,10 +2,19 @@ require 'rubygems'
 require 'sinatra'
 require 'time'
 
+require 'lib/cache'
 require 'lib/twente_milieu_data'
 
 # the full url where this app will be installed.
 BASE_URL = "http://afcal.micheljansen.org"
+
+CONFIG = {}
+CONFIG['memcached'] = 'localhost:11211'
+
+# add caching to Sinatra
+# class Sinatra::Event
+#   include CacheableEvent
+# end
 
 helpers do
   include Rack::Utils
@@ -29,7 +38,9 @@ get '/:postalcode/:housenumber/all.:format' do
   alarm = params[:alarm].to_i if params[:alarm]
   
   #fetch events
-  @all_events = TwenteMilieuData.new(params[:postalcode], params[:housenumber], time).all_events
+  @all_events = Sinatra::Cache.cache("#{params[:postalcode]}/#{params[:housenumber]}/#{time}") do
+    TwenteMilieuData.new(params[:postalcode], params[:housenumber], time).all_events
+  end
   
   case params[:format]
   when "ics"
