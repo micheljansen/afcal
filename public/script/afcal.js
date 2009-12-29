@@ -119,5 +119,5 @@ function generate_url() {
  * Removes invalid characters from postal code or house number components
  */
 function strip_crap(url_component) {
-	return encodeURLComponent(url_component.replace(/[^a-z|^0-9|^:]/gi, ""));
+	return encodeURIComponent(url_component.replace(/[^a-z|^0-9|^:]/gi, ""));
 }
