@@ -3,7 +3,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'cgi'
 # require 'icalendar'
-require 'vendor/icalendar-1.1.0/icalendar'
+require 'vendor/icalendar-1.1.0/lib/icalendar'
 require 'date'
 
 require 'lib/event'

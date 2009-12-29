@@ -1,6 +1,6 @@
 require 'rubygems'
 # require 'icalendar'
-require 'vendor/icalendar-1.1.0/icalendar'
+require 'vendor/icalendar-1.1.0/lib/icalendar'
 require 'date'
 
 class Event
