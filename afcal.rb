@@ -6,7 +6,7 @@ require 'lib/cache'
 require 'lib/twente_milieu_data'
 
 # the full url where this app will be installed.
-BASE_URL = "http://afcal.micheljansen.org"
+BASE_URL = 'http://strong-river-62.heroku.com'
 
 CONFIG = {}
 CONFIG['memcached'] = 'localhost:11211'
