@@ -76,6 +76,10 @@ function update_url() {
   $("#target_url a").attr("href", url).text(url);
 }
 
+/**
+ * Builds the URL from all the appropriate form fields.
+ * Expects a function base_url() to be defined that returns a string representing the url root.
+ */
 function generate_url() {
   var postalcode = $("#postalcode").val()
   if(postalcode == "") {
@@ -87,14 +91,14 @@ function generate_url() {
     homenumber = "huisnummer"
   }
   
-  var url = base_url()+"/"+postalcode+"/"+homenumber+"/all.ics";
+  var url = base_url()+"/"+strip_crap(postalcode)+"/"+strip_crap(homenumber)+"/all.ics";
   
   // time and alarm are optional
   var time = null;
   if($("#specific_time").attr("checked")) {
     time = $("#time").val();
     if(time != "" && time != "HH:MM") {
-      url += "?time="+time;
+      url += "?time="+strip_crap(time);
     }
     else {
       time = null;
@@ -105,8 +109,15 @@ function generate_url() {
   if($("#alarm option:selected").val() != "disabled") {
     alarm = $("#alarm").val();
     url += (time == null ? "?" : "&");
-    url += "alarm="+alarm
+    url += "alarm="+strip_crap(alarm);
   }
   
   return url;
+}
+
+/**
+ * Removes invalid characters from postal code or house number components
+ */
+function strip_crap(url_component) {
+	return encodeURLComponent(url_component.replace(/[^a-z|^0-9|^:]/gi, ""));
 }
