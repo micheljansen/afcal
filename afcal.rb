@@ -87,6 +87,8 @@ get '/:postalcode/:housenumber/all.:format' do
     
     icalendar.prodid = "afcal"
     icalendar.custom_property("X-WR-CALNAME;VALUE=TEXT", "Twente Milieu Afvaldata")
+    icalendar.custom_property("X-WR-CALDESC;VALUE=TEXT", 
+    "De data waarop Twente Milieu het restafval, GFT, papier etc. ophaalt bij #{@postalcode} #{@housenumber}")
     
     if alarm
       icalendar.events.each do |event|
