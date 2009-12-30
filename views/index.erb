@@ -21,24 +21,24 @@
           <table>
             <tr>
               <th><label for="postalcode">Postcode</label></th>
-              <td><input id="postalcode" name="postalcode" type="text" maxlength="7"/></td>
+              <td><input id="postalcode" name="postalcode" type="text" maxlength="7" value="<%=h @postalcode %>"/></td>
             </tr>
             <tr>
               <th><label for="homenumber">Huisnummer</label></th>
-              <td><input id="homenumber" name="homenumber" type="text" maxlength="7"/></td>
+              <td><input id="homenumber" name="homenumber" type="text" maxlength="7" value="<%=h @homenumber %>"/></td>
             </tr>
             <tr>
               <th class="multirow"><label for="time">Tijd</label></th>
               <td>
                 <ul id="timechoices">
                   <li>
-                    <input id="allday" name="allday" value="1" type="radio" checked="checked"/>
+                    <input id="allday" name="allday" value="1" type="radio"<% if @allday %> checked="checked"<% end %>/>
                     <label for="allday">Hele dag</label>
                   </li>
                   <li>
-                    <input id="specific_time" name="allday" value="0" type="radio"/>
+                    <input id="specific_time" name="allday" value="0" type="radio"<% if !@allday %> checked="checked"<% end %>/>
                     <label for="specific_time">Op tijd</label>
-                    <input id="time" name="time" type="text" maxlength="5"/>
+                    <input id="time" name="time" type="text" maxlength="5" value="<%=h @time %>"/>
                   </li>
               </td>
             </tr>
@@ -48,23 +48,24 @@
                 <select id="alarm" name="alarm">
                   <option value="disabled">Geen alarm</option>
                   <% [0,15,30,60,90,120].each do |m| %>
-                    <option value="<%=h m %>"><%=h m %> minuten van tevoren</option>
+                    <option value="<%=h m %>"<% if @alarm.to_s == m.to_s %> selected="selected"<% end %>><%=h m %> minuten van tevoren</option>
                   <% end %>
                 </select>
               </td>
             </tr>
           </table>
+          <input id="submitbutton" type="submit" value="Genereer URL"/>
         </fieldset>
       </form>
     </div>
     
-    <div id="step_2" class="stepbox">
+    <div id="step_2" class="stepbox"<% if @postalcode == "" %> style="display: none"<% end %>>
       <h2 id="step_2_header" class="step_header">Stap 2</h2>
       <p id = "step_2_explanation" class="step_explanation">
         Kopiëer de volgende URL en gebruik deze om op te subscriben in je kalender-applicatie. <a id="step_2_more_link" class="more_link" href="#">»</a>
       </p>
       <span id="target_url">
-        <a href="<%=h BASE_URL %>"><%=h BASE_URL %></a>
+        <a href="<%=h @generated_url %>"><%=h @generated_url %></a>
       </span>
       <div id="step_2_additional_explanation" class="additional_explanation">
         <p>

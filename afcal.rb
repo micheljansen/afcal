@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'time'
 require 'logger'
+require 'cgi'
 
 require 'lib/cache'
 require 'lib/twente_milieu_data'
@@ -32,6 +33,10 @@ helpers do
   def logger
     LOGGER
   end
+  
+  def extract_postalcode(param)
+    param.to_s.gsub(/[^a-z|^0-9]/i, "")[0..5]
+  end
 end
 
 helpers do
@@ -40,6 +45,19 @@ helpers do
 end
 
 get '/' do
+  @postalcode = params[:postalcode] ? extract_postalcode(params[:postalcode]) : ""
+  @homenumber = params[:homenumber] ? params[:homenumber].to_i : ""
+  @allday = params[:allday] == "0" ? false : true
+  @time = params[:time] ? params[:time] : ""
+  @alarm = params[:alarm]
+  
+  @generated_url = "#{BASE_URL}/#{@postalcode == "" ? "postcode" : @postalcode}/#{@homenuber == "" ? "huisnummer" : @homenumber}/all.ics"
+  @generated_url += "?time=#{CGI.escape(@time)}" if !@allday
+  if @alarm != "disabled"
+    @generated_url += (!@allday ? "&" : "?")
+    @generated_url += "alarm=#{@alarm}"
+  end
+  
   erb :index
 end
 
@@ -47,13 +65,15 @@ get '/:postalcode/:housenumber/all.:format' do
 
   #sanitize parameters
   raise "no postal code provided" if params[:postalcode].nil? 
-  @postalcode = params[:postalcode].gsub(/[^a-z|^0-9]/i, "")[0..5]
+  @postalcode = extract_postalcode(params[:postalcode])
   
   raise "no house number provided" if params[:housenumber].nil?
   @housenumber = params[:housenumber].to_i
   
   time = Time.parse(params[:time]) if params[:time] && params[:time] != ""
   alarm = params[:alarm].to_i if params[:alarm]
+  
+  
   
   #fetch events
   @all_events = Sinatra::Cache.cache("#{params[:postalcode]}/#{params[:housenumber]}/#{time}", :expire => 60*60*24) do

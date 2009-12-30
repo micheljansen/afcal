@@ -1,5 +1,9 @@
 $(document).ready(function(){
   update_url();
+
+	$("#settings").submit(function() { return false;})
+	$("#submitbutton").hide();
+	$("#step_2").show();
   
   // show and hide some things
   $("#step_1_more_link").show();
