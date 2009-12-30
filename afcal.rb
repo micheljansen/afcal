@@ -24,7 +24,7 @@ configure :development do
 end
 
 configure :production do
-  LOGGER = Logger.new("log/sinatra.production.log")
+  LOGGER = Logger.new("log/sinatra.log")
   CONFIG['memcached'] = 'localhost:11211'
 end
  
@@ -64,6 +64,8 @@ get '/:postalcode/:housenumber/all.:format' do
   when "ics"
     content_type 'text/calendar'
     icalendar = @all_events.to_icalendar
+    
+    icalendar.prodid = "afcal"
     
     if alarm
       icalendar.events.each do |event|
