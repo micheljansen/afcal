@@ -76,8 +76,8 @@ get '/:postalcode/:housenumber/all.:format' do
   
   
   #fetch events
-  @all_events = Sinatra::Cache.cache("#{params[:postalcode]}/#{params[:housenumber]}/#{time}", :expire => 60*60*24) do
-    TwenteMilieuData.new(params[:postalcode], params[:housenumber], time).all_events
+  @all_events = Sinatra::Cache.cache("#{@postalcode}/#{@housenumber}/#{time}", :expire => 60*60*24) do
+    TwenteMilieuData.new(@postalcode, @housenumber, time).all_events
   end
   
   case params[:format]
