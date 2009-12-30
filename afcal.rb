@@ -68,8 +68,9 @@ get '/:postalcode/:housenumber/all.:format' do
   @postalcode = extract_postalcode(params[:postalcode])
   
   raise "no house number provided" if params[:housenumber].nil?
-  @housenumber = params[:housenumber].to_i
+  @housenumber = params[:housenumber].to_i.to_s
   
+  time = nil
   time = Time.parse(params[:time]) if params[:time] && params[:time] != ""
   alarm = params[:alarm].to_i if params[:alarm]
   
