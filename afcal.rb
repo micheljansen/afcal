@@ -86,7 +86,7 @@ get '/:postalcode/:housenumber/all.:format' do
     icalendar = @all_events.to_icalendar
     
     icalendar.prodid = "afcal"
-    icalendar.custom_property("X-WR-CALNAME;VALUE=TEXT", "Twente Milieu Afval-iCalendar")
+    icalendar.custom_property("X-WR-CALNAME;VALUE=TEXT", "Twente Milieu Afvaldata")
     
     if alarm
       icalendar.events.each do |event|
