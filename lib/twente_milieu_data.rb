@@ -28,7 +28,7 @@ class TwenteMilieuData
   
   def fetch_data
     url = "http://twentemilieu.nl/site/pagina.php?formActie=afvalkalender&formulier=afvalkalender&id=5&postcode=#{CGI.escape(@postalcode)}&huisnummer=#{CGI.escape(@housenumber)}&fracties%5B%5D=7&fracties%5B%5D=6&fracties%5B%5D=5&fracties%5B%5D=8"
-    puts "Fetching data from '#{url}'"
+    LOGGER.info("Fetching data from '#{url}'")
     @doc = Nokogiri::HTML(open(url))
   end
   

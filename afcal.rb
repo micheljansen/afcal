@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'time'
+require 'logger'
 
 require 'lib/cache'
 require 'lib/twente_milieu_data'
@@ -8,13 +9,30 @@ require 'lib/twente_milieu_data'
 # the full url where this app will be installed.
 BASE_URL = 'http://afcal.micheljansen.org'
 
-CONFIG = {}
-CONFIG['memcached'] = 'localhost:11211'
-
 # add caching to Sinatra
 # class Sinatra::Event
 #   include CacheableEvent
 # end
+
+configure do 
+  CONFIG = {}
+end
+
+configure :development do
+  LOGGER = Logger.new(STDOUT)
+  CONFIG['memcached'] = 'localhost:11211'
+end
+
+configure :production do
+  LOGGER = Logger.new("log/sinatra.production.log")
+  CONFIG['memcached'] = 'localhost:11211'
+end
+ 
+helpers do
+  def logger
+    LOGGER
+  end
+end
 
 helpers do
   include Rack::Utils
